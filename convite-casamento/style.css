@@ -1,0 +1,277 @@
+/* Claudia Cristina & Max Alexandre — convite de casamento */
+:root {
+  --brown: #4b291d;
+  --brown-deep: #321a13;
+  --brown-light: #704632;
+  --cream: #f5eddf;
+  --cream-light: #fffaf1;
+  --gold: #c6a15b;
+  --gold-light: #e5cb91;
+  --ink: #4b3025;
+  --shadow: 0 22px 65px rgba(35, 17, 10, .22);
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.7), transparent 55%),
+    linear-gradient(135deg, #e8dcc8, #f8f1e6 48%, #e4d3bc);
+  font-family: "Montserrat", Arial, sans-serif;
+}
+button { font: inherit; }
+.site-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 38px 18px 18px;
+  overflow: hidden;
+}
+.screen {
+  display: none;
+  width: min(100%, 760px);
+  min-height: min(760px, calc(100vh - 95px));
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: screenIn .9s ease both;
+}
+.screen.is-active { display: flex; }
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.eyebrow {
+  margin: 0 0 13px;
+  color: #9b783d;
+  font-size: .68rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+}
+h1, h2, .seal-initials {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+}
+.intro-copy { margin-bottom: 34px; }
+.intro-copy h1 {
+  margin: 0;
+  color: var(--brown);
+  font-size: clamp(2rem, 6vw, 3.3rem);
+  line-height: 1.05;
+}
+.intro-copy h1 span { color: var(--gold); font-style: italic; }
+.intro-subtitle { margin: 13px 0 0; color: #876c54; font-family: Georgia, serif; font-style: italic; }
+
+.envelope-screen { flex-direction: column; }
+.envelope-button {
+  display: block;
+  width: min(90vw, 510px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  perspective: 1100px;
+  -webkit-tap-highlight-color: transparent;
+}
+.envelope {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.55 / 1;
+  filter: drop-shadow(0 24px 25px rgba(45, 23, 14, .23));
+  transform-style: preserve-3d;
+  transition: transform .5s ease;
+}
+.envelope-button:hover .envelope { transform: translateY(-5px); }
+.envelope-back, .envelope-front, .envelope-flap {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+}
+.envelope-back {
+  background: linear-gradient(145deg, #744a32, var(--brown) 55%, #3b2118);
+  border: 1px solid rgba(218, 183, 112, .75);
+}
+.envelope-back::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(221, 190, 128, .5);
+}
+.envelope-front {
+  z-index: 3;
+  background:
+    linear-gradient(145deg, transparent 49.7%, rgba(35,17,11,.13) 50%, transparent 50.5%),
+    linear-gradient(35deg, transparent 49.7%, rgba(35,17,11,.13) 50%, transparent 50.5%),
+    linear-gradient(145deg, #603a27, #4b291d 65%, #3c2118);
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+}
+.envelope-flap {
+  z-index: 4;
+  background: linear-gradient(145deg, #81583d, #563322 75%);
+  clip-path: polygon(0 0, 100% 0, 50% 59%);
+  transform-origin: top center;
+  transition: transform 1s cubic-bezier(.2,.75,.25,1), z-index .1s 0s;
+  border-top: 1px solid rgba(229,203,145,.7);
+}
+.letter-peek {
+  position: absolute;
+  z-index: 2;
+  left: 9%; right: 9%; top: 5%;
+  height: 88%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--brown);
+  background: var(--cream-light);
+  border: 1px solid var(--gold);
+  font-family: Georgia, serif;
+  transition: transform 1s .25s ease;
+}
+.letter-peek strong { font: 2.3rem "Cormorant Garamond", Georgia, serif; }
+.letter-peek i { color: var(--gold); }
+.seal {
+  position: absolute;
+  z-index: 5;
+  left: 50%; top: 52%;
+  width: clamp(112px, 26vw, 148px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: #805c2b;
+  background:
+    radial-gradient(circle at 35% 25%, #fffdf3, #e9d6ae 72%, #c9a66c);
+  border: 5px double #b58a46;
+  box-shadow: 0 4px 12px rgba(20, 10, 5, .35), inset 0 0 0 4px rgba(255,255,255,.4);
+  transition: opacity .45s ease, transform .65s ease;
+}
+.seal-mary { font-size: 1.45rem; line-height: 1; }
+.seal-caption { font-size: .43rem; letter-spacing: .11em; font-weight: 600; }
+.seal-initials { font-size: 2rem; line-height: .95; }
+.seal-initials i { color: #b18b4d; font-size: 1.25rem; }
+.envelope-screen.opening .envelope-flap { transform: rotateX(180deg); z-index: 1; }
+.envelope-screen.opening .letter-peek { transform: translateY(-34%); }
+.envelope-screen.opening .seal { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+.envelope-screen.opening .envelope { transform: translateY(-8px) scale(1.02); }
+.tap-hint { margin: 25px 0 10px; color: #8b725e; font-size: .75rem; letter-spacing: .08em; }
+.text-button, .primary-button {
+  border: 1px solid var(--gold);
+  padding: 13px 27px;
+  color: var(--cream-light);
+  background: var(--brown);
+  letter-spacing: .16em;
+  font-size: .68rem;
+  cursor: pointer;
+  transition: background .25s, transform .25s;
+}
+.text-button:hover, .primary-button:hover { background: var(--brown-light); transform: translateY(-2px); }
+
+.section-frame {
+  width: min(100%, 620px);
+  padding: clamp(25px, 5vw, 48px);
+  background: rgba(255,250,241,.76);
+  border: 1px solid rgba(181,138,70,.65);
+  box-shadow: var(--shadow);
+}
+.section-frame h2 {
+  margin: 0 0 25px;
+  color: var(--brown);
+  font-size: clamp(2rem, 5vw, 2.8rem);
+}
+.photo-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #e7d9c5;
+  border: 7px solid #fffaf1;
+  outline: 1px solid var(--gold);
+  box-shadow: 0 8px 25px rgba(54,31,18,.15);
+}
+.church-photo { aspect-ratio: 4 / 3; }
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 15px;
+  color: #80654c;
+  background: linear-gradient(135deg, #eee2cf, #d9c4a7);
+  font-family: Georgia, serif;
+}
+.image-fallback span { font-size: 1.3rem; }
+.image-fallback small { font: .68rem "Montserrat", sans-serif; }
+.photo-frame.has-image .image-fallback { display: none; }
+.photo-caption { margin: 23px 0; color: #806b56; font-family: Georgia, serif; font-style: italic; }
+
+.invitation-screen { align-items: flex-start; }
+.invitation-card {
+  position: relative;
+  width: min(100%, 650px);
+  padding: clamp(28px, 6vw, 58px);
+  background: var(--cream-light);
+  border: 1px solid var(--gold);
+  outline: 7px solid rgba(198,161,91,.13);
+  box-shadow: var(--shadow);
+}
+.invitation-card::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(198,161,91,.55);
+  pointer-events: none;
+}
+.card-ornament { color: var(--gold); letter-spacing: .35em; font-size: 1.25rem; }
+.top-ornament { margin-bottom: 25px; }
+.invitation-opening, .invitation-request {
+  max-width: 440px;
+  margin: 12px auto;
+  color: #806b56;
+  font: italic 1rem/1.6 Georgia, serif;
+}
+.invitation-card h2 {
+  margin: 15px 0 0;
+  color: var(--brown);
+  font-size: clamp(2.5rem, 8vw, 4.2rem);
+  line-height: .95;
+}
+.ampersand { display: block; margin: 7px 0; color: var(--gold); font: italic 2rem Georgia, serif; }
+.card-divider { margin: 28px auto 20px; width: 70%; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.card-divider span { position: relative; top: -12px; padding: 0 12px; color: var(--gold); background: var(--cream-light); }
+.date-placeholder { margin: 0; color: var(--brown); font: 1.35rem "Cormorant Garamond", Georgia, serif; }
+.location-placeholder { margin: 8px 0 24px; color: #8a745e; font-size: .75rem; }
+.invitation-photo { max-width: 390px; aspect-ratio: 3 / 4; margin: 0 auto 24px; }
+.closing-line { margin: 18px 0 24px; color: #806b56; font: italic 1rem Georgia, serif; }
+.bottom-ornament { margin-top: 20px; }
+.site-footer { padding: 15px 10px 0; color: #927d68; font-size: .62rem; letter-spacing: .08em; text-align: center; }
+
+@media (max-width: 520px) {
+  .site-shell { padding: 25px 13px 12px; }
+  .screen { min-height: calc(100vh - 75px); }
+  .intro-copy { margin-bottom: 28px; }
+  .envelope-button { width: min(94vw, 460px); }
+  .section-frame { padding: 25px 18px; }
+  .invitation-card { padding: 35px 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
